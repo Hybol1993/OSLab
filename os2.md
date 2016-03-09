@@ -2,6 +2,8 @@ os2.c代码说明
 =============
 <center>毛海宇    2015310607</center>
 
+
+<pre><code>
 // os2.c -- test various features
 
 #include <u.h>
@@ -193,3 +195,4 @@ main()
 
   halt(0);
 }
+</code></pre>
