@@ -3,7 +3,8 @@ os1.c代码说明
 <center>毛海宇    2015310607</center>
 
 ------------------------------------------------------
-'
+
+<pre><code>
 task0()
 {
   while(current < 10) {
@@ -12,8 +13,9 @@ task0()
   write(1,"task0 exit\n", 11);
   halt(0);//挂起系统
 }
-'
+</code></pre>
 
+<pre><code>
 task1()
 {
   while(current < 10) {
@@ -22,7 +24,9 @@ task1()
   write(1,"task1 exit\n", 11);
   halt(0);
 }
+</code></pre>
 
+<pre><code>
 swtch(int *old, int new) // switch stacks
 {
   asm(LEA, 0); // a = sp
@@ -31,7 +35,9 @@ swtch(int *old, int new) // switch stacks
   asm(LL, 16); // a = new
   asm(SSP);    // sp = a
 }
+</code></pre>
 
+<pre><code>
 trap()
 {
   if (++current & 1)
@@ -39,7 +45,9 @@ trap()
   else
     swtch(&task1_sp, task0_sp);
 }
+</code></pre>
 
+<pre><code>
 alltraps()
 {
   //压栈，保护现场
@@ -56,7 +64,9 @@ alltraps()
   asm(RTI);  // return from interrupt, POP fault code, pc, sp,  if fault code== USER, then switch to user mode; if has pending interrupt, process the interrupt
 
 }
+</code></pre>
 
+<pre><code>
 trapret() // 完成对返回前的寄存器和栈的恢复准备工作，最后通过RTI中断返回指令回到中断打断的地方继续执行。
 {
   asm(POPC);
@@ -64,7 +74,9 @@ trapret() // 完成对返回前的寄存器和栈的恢复准备工作，最后�
   asm(POPA);
   asm(RTI);  //中断返回
 }
+</code></pre>
 
+<pre><code>
 main()
 {
   current = 0;
@@ -89,5 +101,6 @@ main()
 
   task0(); //return halt(0)  printf( task0 exit）；
 }
+</code></pre>
 
 
